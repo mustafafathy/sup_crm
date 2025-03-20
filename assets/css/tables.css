@@ -1,0 +1,32 @@
+/* tables.css */
+
+/* Table centered (Custom) */
+.table-centered th,
+.table-centered td {
+    vertical-align: middle !important;
+}
+
+/* Custom table components (Custom) */
+.table .table-user img {
+    height: 30px;
+    width: 30px;
+}
+
+.table > :not(caption)>*>* {
+    background-color: var(--table-bg) !important;
+}
+
+.table.table-bordered tbody {
+    border-top: 1px solid;
+    border-top-color: inherit;
+}
+
+.table-sm .action-icon {
+    font-size: 1rem;
+}
+
+/* Tables fluid */
+.table-nowrap th,
+.table-nowrap td {
+    white-space: nowrap;
+}
