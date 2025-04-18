@@ -16,7 +16,7 @@
 \application/views/cache/
     
 # Ignoring vendor directory for Composer dependencies
-/vendor/
+
 
 # Ignoring the main entry point (index.php)
 index.php
