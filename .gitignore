@@ -1,25 +1,5 @@
-# Ignoring environment-specific config files
-/application/config/app-config.php
-/application/config/database.php
-/application/config/autoload.php
-/application/config/routes.php
-/application/config/*_config.php
-
-# Ignoring sensitive files with keys or passwords
-/application/config/*.env
-/application/config/*.local
-
-# Ignoring system files
-/application/cache/
-\application/logs/
-\application/session/
-\application/views/cache/
-    
-# Ignoring vendor directory for Composer dependencies
-
 
 # Ignoring the main entry point (index.php)
 index.php
 application/config/app-config.php
-index.php
-index.php
+application/logs
