@@ -481,12 +481,12 @@ h3 {
 
 #grid_tasks_all {
     gap: 16px;
-
+    padding: 0 24px;
 }
 
 #grid_tasks_me {
     gap: 16px;
-
+    padding: 0 24px;
 }
 
 .view-details {
