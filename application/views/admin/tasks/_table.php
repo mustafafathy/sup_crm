@@ -3,7 +3,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 $table_data = [
-    _l('the_number_sign'),
+    "ID",
     _l('tasks_dt_name'),
     // _l('task_status'),
 	[
@@ -16,7 +16,6 @@ $table_data = [
         'th_attrs' => ['class' => 'duedate'],
     ],
     _l('task_assigned'),
-    _l('tags'),
     _l('tasks_list_priority'),
 ];
 

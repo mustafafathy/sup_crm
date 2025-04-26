@@ -56,8 +56,10 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="thousand_separator"><small class="req text-danger">*
-                                        </small><?php echo _l('settings_sales_thousand_separator'); ?></label>
+                                    <label for="thousand_separator">
+                                        <?php echo _l('settings_sales_thousand_separator'); ?>
+                                        <small class="req text-danger">*</small>
+                                    </label>
                                     <select id="thousand_separator" class="selectpicker" name="thousand_separator"
                                         data-width="100%" data-show-subtext="true">
                                         <option value=",">,</option>

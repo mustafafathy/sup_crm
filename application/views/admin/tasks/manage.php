@@ -163,8 +163,12 @@ $statuses = $CI->tasks_model->get_statuses();
         display: none;
     }
 
-    .modal-body .col-md-6 {
-        padding-left: 0px;
+    .modal-body #description {
+        resize: none;
+    }
+
+    .modal-body label, .bold {
+        font-weight: bold;
     }
 
     .card-element span {
@@ -285,7 +289,7 @@ $statuses = $CI->tasks_model->get_statuses();
         /* display: flex; */
         padding: 15px;
         text-align: right;
-        border-top: 1px solid #e5e5e5;
+        border-top: 0;
         flex-wrap: wrap;
         justify-content: space-evenly;
         align-content: center;
@@ -304,7 +308,6 @@ $statuses = $CI->tasks_model->get_statuses();
     /* .modal-footer .btn.btn-primary{
         background-color: #0B70A6;
     } */
-
 
     .card-element {
         border: none;
@@ -459,6 +462,8 @@ $statuses = $CI->tasks_model->get_statuses();
     .form-inline .checkbox input[type=checkbox],
     .form-inline .radio input[type=radio] {
         cursor: pointer;
+        width: 20px;
+        height: 20px;
     }
 
     td .checkbox label:before {
@@ -717,7 +722,7 @@ $statuses = $CI->tasks_model->get_statuses();
     }
 
     table.dataTable thead .sorting:after {
-        top: 20px;
+        top: 30px;
     }
 
     .page-section {}
