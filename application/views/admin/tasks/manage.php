@@ -114,7 +114,7 @@ $statuses = $CI->tasks_model->get_statuses();
     <div class="content">
         <?php
         if ($this->session->has_userdata('tasks_kanban_view') && $this->session->userdata('tasks_kanban_view') == 'true') { ?>
-            <div class="kan-ban-tab" id="kan-ban-tab" style="/* overflow:auto; */">
+            <div class="kan-ban-tab" id="kan-ban-tab">
                 <div class="row">
                     <div id="kanban-params">
                         <?php echo form_hidden('project_id', $this->input->get('project_id')); ?>
@@ -599,7 +599,8 @@ $statuses = $CI->tasks_model->get_statuses();
         margin-top: 0px !important;
         margin-bottom: 6px !important;
         max-width: none !important;
-        border-collapse: separate !important box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.08);
+        border-collapse: separate !important;
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.08);
         border-radius: 6px;
         overflow: visible;
 
@@ -752,10 +753,6 @@ $statuses = $CI->tasks_model->get_statuses();
         margin-right: 20px;
     }
 
-    #tasks>tbody>.has-row-options.even {
-        background-color: rgba(211, 211, 211, 0.2);
-    }
-
                             	.priority{
                                 max-width:140px;}
     .tasks-count {
@@ -783,27 +780,25 @@ $statuses = $CI->tasks_model->get_statuses();
         background: var(--background) !important;
     }
 
-    table.dataTable tbody td {
-        border-color: rgb(226 232 240 / 00%);
-    }
-
     /* Table Row Shadow Effect */
     .table-tasks tr {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
         /* Shadow effect */
         transition: box-shadow 0.2s ease-in-out;
         /* Smooth hover effect */
         height: 80px;
+        border-bottom: 1px solid #D4D4D4;
+        background: #ffffff;
     }
+
+    .table-tasks tr:nth-child(even){
+        background: #F9F9F9;
+    }
+
 
     /* Table Cell Styling */
     .table-tasks td {
-        border: 1px solid #dc2626;
-        /* Red border around cells */
         padding: 12px;
-        /* Inner padding for cells */
-        background-color: #fff;
-        /* Background color for cells */
     }
 
     /* Hover Effect (Optional) */
@@ -833,7 +828,6 @@ $statuses = $CI->tasks_model->get_statuses();
     /* Table Cell Styling */
     .table-tasks td {
         padding: 12px;
-        border: 1px solid #dc2626;
         position: relative;
         /* To allow relative positioning of child elements */
         overflow: hidden;

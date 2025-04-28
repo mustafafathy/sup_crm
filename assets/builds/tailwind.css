@@ -17541,8 +17541,6 @@ a.bg-danger:hover {
 .table>tbody>tr>td,
 .table>tfoot>tr>td {
     color: black;
-    background-color: white !important;
-    /* border-bottom: 1px solid #D4D4D4 !important; */
 }
 
 [dir=rtl] .table thead th {
@@ -17691,10 +17689,6 @@ div.dataTables_wrapper div.dataTables_paginate {
 [dir=rtl] .dataTables_paginate {
     margin-left: 15px !important;
     text-align: left !important
-}
-
-table.dataTable tbody td {
-    border-color: rgba(226, 232, 240, .7);
 }
 
 table.dataTable thead>tr>th {

@@ -6,7 +6,7 @@
                 <?php echo get_company_logo(get_admin_uri() . '/', 'tw-mt-3')?>
             </div>
 
-</li>
+        </li>
         <?php
          hooks()->do_action('before_render_aside_menu');
          ?>
@@ -79,7 +79,7 @@
                 </span>
             </a>
             <?php } ?>
-            </li>
+        </li>
             <?php hooks()->do_action('after_render_aside_menu'); ?>
             <?php $this->load->view('admin/projects/pinned'); ?>
     </ul>

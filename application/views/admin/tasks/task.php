@@ -131,7 +131,10 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group select-placeholder>">
-                                    <label for="assignees"><?php echo _l('task_single_assignees'); ?></label>
+                                    <label for="assignees">
+                                        Task Owner
+                                        <span class="req text-danger">*</span>
+                                    </label>
                                     <select name="assignees[]" id="assignees" class="selectpicker" data-width="100%"
                                         data-none-selected-text="<?php echo _l('dropdown_non_selected_tex'); ?>"
                                         multiple data-live-search="true">
@@ -148,7 +151,7 @@
                             <div class="col-md-6">
                                 <?php
                                 $follower = (get_option('new_task_auto_follower_current_member') == '1') ? [get_staff_user_id()] : '';
-                                echo render_select('followers[]', $members, ['staffid', ['firstname', 'lastname']], 'task_single_followers', $follower, ['multiple' => true], [], '', '', false);
+                                echo render_select('followers[]', $members, ['staffid', ['firstname', 'lastname']], 'Task Supervisor', $follower, ['multiple' => true], [], '', '', false);
                                 ?>
                             </div>
                             <div class="col-md-6">
@@ -331,6 +334,9 @@
                 name: 'required',
                 startdate: 'required',
                 duedate: 'required',
+                "followers[]": 'required',
+                priority: "required",
+                estimate: "required", 
                 repeat_every_custom: {
                     min: 1
                 },
