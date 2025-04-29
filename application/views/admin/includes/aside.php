@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <aside id="menu" class="sidebar" style="position: fixed;overflow: auto;">
-    <ul class="nav metis-menu" id="side-menu" style="height: 100%;background: #25445f;width: 240px !important;padding: 5px;float: left;border-style: initial;overflow: hidden;overflow-y: visible;">
+    <ul class="nav metis-menu" id="side-menu" style="height: 100%;background: #FFFFFF; border-right: 1px solid #D3D3D3; width: 240px !important;padding: 5px;float: left;overflow: hidden;overflow-y: visible;">
         <li class="tw-mt-[63px] sm:tw-mt-0 -tw-mx-2 tw-overflow-hidden sm:tw-bg-neutral-900/50">
             <div id="logo" class="tw-py-2 tw-px-6 tw-h-[63px] tw-flex tw-items-center">
                 <?php echo get_company_logo(get_admin_uri() . '/', 'tw-mt-3')?>
@@ -80,8 +80,8 @@
             </a>
             <?php } ?>
         </li>
-            <?php hooks()->do_action('after_render_aside_menu'); ?>
-            <?php $this->load->view('admin/projects/pinned'); ?>
+ </li>
+<?php $this->load->view('admin/projects/pinned'); ?>
     </ul>
         <script>
                                                                        // Function to toggle collapse on click

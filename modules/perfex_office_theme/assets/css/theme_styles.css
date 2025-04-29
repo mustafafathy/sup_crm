@@ -1059,10 +1059,6 @@ body.perfex_office_theme_initiated #menu .liveClients {
   z-index: 9999999;
 }
 
-#header .nav svg {
-  color: #fff;
-}
-
 #header li.icon span.notification-title:hover {
   background: #fff !important;
 }
@@ -1410,8 +1406,8 @@ body #wrapper .btn.btn-default i::before {
 }
 
 #logo {
-  background-color: #495fcf;
-  height: 62px !important;
+  background-color: #FFFFFF !important;
+  height: 135px !important;
 }
 
 #logo a {
