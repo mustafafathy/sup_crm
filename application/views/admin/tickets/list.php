@@ -1,8 +1,8 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <?php init_head(); ?>
 <div id="wrapper" class="">
-    <div class="" id="vueApp">
-            <div class="">
+    <div class="content" id="vueApp">
+            <div class="full-flex support-section">
                 <?php if ($task->billed == 1) { ?>
                     <?php echo '<p class="no-margin">' . _l('task_is_billed', '<a href="' . admin_url('invoices/list_invoices/' . $task->invoice_id) . '" target="_blank">' . e(format_invoice_number($task->invoice_id))) . '</a></p>'; ?>
                 <?php } ?>

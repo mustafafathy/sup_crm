@@ -392,6 +392,14 @@ $statuses = $CI->tasks_model->get_statuses();
         border-radius: 8px;
     }
 
+    #tasks thead tr th:first-child {
+        border-radius: 8px 0 0 0;
+    }
+
+    #tasks thead tr th:last-child {
+        border-radius: 0 8px 0 0;
+    }
+
     #tasks>thead>tr>th.sorting_disabled {
         max-width: 10px;
         min-width: 10px;
@@ -600,10 +608,8 @@ $statuses = $CI->tasks_model->get_statuses();
         margin-bottom: 6px !important;
         max-width: none !important;
         border-collapse: separate !important;
-        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.08);
-        border-radius: 6px;
+        box-shadow: 0px 1px 2px -1px #0000001A;
         overflow: visible;
-
     }
 
 
