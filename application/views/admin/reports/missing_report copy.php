@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <link rel="stylesheet" href="<?php echo base_url('assets/tables.css'); ?>">
 
-<?php if ($_GET['account'] == 2) blank_page('SOLAR MISSING REPORT IS COMING SOON :)');?>
+<?php if ($_GET['account'] == 2) blank_page('SOLAR MISSING REPORT IS COMING SOON :)'); ?>
 <?php init_head(); ?>
 <?php $today = date('Y-m-d'); ?>
 
@@ -290,9 +290,9 @@
             </div>
         </div>
     </div>
-    <?php 
-                                    // init_tail(); 
-?>
+    <?php
+    // init_tail(); 
+    ?>
 </body>
 
 </html>
@@ -399,15 +399,15 @@
     const closeModal = document.getElementById('closeModal');
     const exportForm = document.getElementById('exportForm');
 
-    exportBtn.onclick = function () {
+    exportBtn.onclick = function() {
         modal.style.display = 'block';
     }
 
-    closeModal.onclick = function () {
+    closeModal.onclick = function() {
         modal.style.display = 'none';
     }
 
-    window.onclick = function (event) {
+    window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = 'none';
         }
@@ -452,7 +452,9 @@
             const canvas = await html2canvas(document.getElementById('wrapper'));
             const dataUrl = canvas.toDataURL('image/png');
             const blob = await (await fetch(dataUrl)).blob();
-            const item = new ClipboardItem({ 'image/png': blob });
+            const item = new ClipboardItem({
+                'image/png': blob
+            });
             await navigator.clipboard.write([item]);
             alert('Snapshot copied to clipboard!');
         } catch (error) {
@@ -581,7 +583,7 @@
     //     	}
     // 	});
 
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         const chartContainer = document.querySelector('.flex');
         const campaigns = <?php echo json_encode($campaigns); ?>;
 
@@ -625,7 +627,7 @@
                             },
                             tooltip: {
                                 callbacks: {
-                                    label: function (tooltipItem) {
+                                    label: function(tooltipItem) {
                                         return tooltipItem.raw;
                                     }
                                 }
