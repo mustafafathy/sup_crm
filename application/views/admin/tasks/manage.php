@@ -171,10 +171,6 @@ $statuses = $CI->tasks_model->get_statuses();
         font-weight: bold;
     }
 
-    .card-element span {
-        color: #fff;
-    }
-
     .pagination>.active>a,
     .pagination>.active>a:focus,
     .pagination>.active>a:hover,
