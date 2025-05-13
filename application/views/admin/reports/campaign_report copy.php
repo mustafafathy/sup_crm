@@ -708,7 +708,7 @@ toggleButton.addEventListener('click', () => {
 
 	async function takeSnapshot() {
         try {
-            const canvas = await html2canvas(document.getElementById('wrapper'));
+            const canvas = await html2canvas(document.getElementsByTagName('wrapper'));
             const dataUrl = canvas.toDataURL('image/png');
             const blob = await (await fetch(dataUrl)).blob();
             const item = new ClipboardItem({ 'image/png': blob });

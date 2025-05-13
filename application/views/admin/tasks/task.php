@@ -3,8 +3,8 @@
 <div class="modal fade<?php if (isset($task)) {
                             echo ' edit';
                         } ?>" id="_task_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" <?php if ($this->input->get('opened_from_lead_id')) {
-                                                                                        echo 'data-lead-id=' . $this->input->get('opened_from_lead_id');
-                                                                                    } ?>>
+                                                                                                                echo 'data-lead-id=' . $this->input->get('opened_from_lead_id');
+                                                                                                            } ?>>
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -218,8 +218,8 @@
                                     <input type="number" class="form-control" <?php if ($value == 0) {
                                                                                     echo ' disabled';
                                                                                 } ?> name="cycles" id="cycles" value="<?php echo e($value); ?>" <?php if (isset($task) && $task->total_cycles > 0) {
-                                                                                            echo 'min="' . e($task->total_cycles) . '"';
-                                                                                        } ?>>
+                                                                                                                                                    echo 'min="' . e($task->total_cycles) . '"';
+                                                                                                                                                } ?>>
                                     <div class="input-group-addon">
                                         <div class="checkbox">
                                             <input type="checkbox" <?php if ($value == 0) {
@@ -253,16 +253,17 @@
                         </div>
                         <?php if (!isset($task)) { ?>
                         <?php } ?>
-
-                        <?php
-                        if (
-                            isset($task)
-                            && $task->status == Tasks_model::STATUS_COMPLETE
-                            && (staff_can('create', 'tasks') || staff_can('edit', 'tasks'))
-                        ) {
-                            echo render_datetime_input('datefinished', 'task_finished', _dt($task->datefinished));
-                        }
-                        ?>
+                        <div class="col-md-12">
+                            <?php
+                            if (
+                                isset($task)
+                                && $task->status == Tasks_model::STATUS_COMPLETE
+                                && (staff_can('create', 'tasks') || staff_can('edit', 'tasks'))
+                            ) {
+                                echo render_datetime_input('datefinished', 'task_finished', _dt($task->datefinished));
+                            }
+                            ?>
+                        </div>
                         <div class="form-group checklist-templates-wrapper<?php if (count($checklistTemplates) == 0 || isset($task)) {
                                                                                 echo ' hide';
                                                                             }  ?>">
@@ -334,7 +335,7 @@
                 duedate: 'required',
                 "followers[]": 'required',
                 priority: "required",
-                estimate: "required", 
+                estimate: "required",
                 repeat_every_custom: {
                     min: 1
                 },

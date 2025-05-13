@@ -65,7 +65,7 @@ $statuses = $CI->tasks_model->get_statuses();
                     </a>
                 <?php } ?>
                 <a href="<?php echo admin_url(!$this->input->get('project_id') ? ('tasks/switch_kanban/' . $switch_kanban) : ('projects/view/' . $this->input->get('project_id') . '?group=project_tasks')); ?>"
-                    class=" button-pr" data-toggle="tooltip" data-placement="top"
+                    class=" button-pr tw-hidden " data-toggle="tooltip" data-placement="top"
                     style="width: auto;height: inherit;margin-left:8px;"
                     data-title="<?php echo $switch_kanban == 1 ? _l('switch_to_list_view') : _l('leads_switch_to_kanban'); ?>">
                     <?php if ($switch_kanban == 1) { ?>
@@ -206,11 +206,11 @@ $statuses = $CI->tasks_model->get_statuses();
         padding-left: 25px;
     }
 
-    li.lead-kan-ban.current-user-lead .panel-body,
+    /* li.lead-kan-ban.current-user-lead .panel-body,
     li.task.current-user-task .panel-body {
-        /* background: #eff6ff !important;
-        border: 1px solid #dbeafe !important; */
-    }
+        background: #eff6ff !important;
+        border: 1px solid #dbeafe !important;
+    } */
 
     #kan-ban .panel-body {
         background-color: #FFFFFF !important;

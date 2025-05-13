@@ -1,5 +1,11 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <!-- <link rel="stylesheet" href="<?php echo base_url('assets/tables.css'); ?>"> -->
+<script src="<?php echo site_url('resources/js/html2canvas.min.js'); ?>"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />t>
 
 <?php if ($_GET['account'] == 2) blank_page('SOLAR MISSING REPORT IS COMING SOON :)'); ?>
 <?php init_head(); ?>
@@ -180,16 +186,19 @@
 
         ?>
         <div class="content-wrapper">
-            <div class="grid grid-cols-4 gap-5">
+            <div class="grid grid-cols-5 gap-5">
                 <div class="reports-header col-span-3">
                     <h3>RE Summary</h3>
                 </div>
-                <div class="reports-header-actions grid grid-cols-2 tw-justify-between">
+                <div class="reports-header-actions col-span-2 grid grid-cols-3 tw-justify-between">
+                    <div class="form-group">
+                        <input class="form-control" type="text" id="date_range" name="date_range" />
+                    </div>
                     <button>
                         <i class="fa-solid fa-up-right-from-square"></i>
                         Export
                     </button>
-                    <button>
+                    <button onclick="takeSnapshot()">
                         <i class="fa-solid fa-camera"></i>
                         Screenshoot
                     </button>
@@ -566,15 +575,43 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <script>
+    $(function() {
+        $('input[name="date_range"]').daterangepicker({
+            opens: 'left'
+        }, function(start, end, label) {
+            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+        });
+    });
+</script>
+<script>
     function ticketToggler(ticketId) {
         const targetedTicket = document.getElementById(ticketId);
         const toggleButton = document.getElementById(ticketId).getElementsByTagName("button")[0];
         const ticketTable = document.getElementById(ticketId).getElementsByClassName("more-states")[0];
-        //  targetedTicket.classList.toggle("ticket-active");
+
         if (ticketTable) {
             targetedTicket.classList.toggle("row-span-2");
-            toggleButton.innerText = "view less";
             ticketTable.classList.toggle("hidden");
+            if (toggleButton.innerText === "View Less") {
+                toggleButton.innerText = "view more";
+            } else {
+                toggleButton.innerText = "view less";
+            }
+            console.log(toggleButton.innerText)
+        }
+    }
+
+    async function takeSnapshot() {
+        try {
+            const canvas = await html2canvas(document.getElementById('wrapper'));
+            const dataUrl = canvas.toDataURL('image/png');
+            const blob = await (await fetch(dataUrl)).blob();
+            const item = new ClipboardItem({ 'image/png': blob });
+            await navigator.clipboard.write([item]);
+            alert('Snapshot copied to clipboard!');
+        } catch (error) {
+            console.error('Failed to copy snapshot to clipboard:', error);
+            alert('Failed to copy snapshot to clipboard.');
         }
     }
 </script>
