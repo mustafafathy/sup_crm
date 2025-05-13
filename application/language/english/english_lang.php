@@ -1548,7 +1548,7 @@ $lang['send_file_subject']        = 'Email Subject';
 $lang['send_file_email']          = 'Email Address';
 $lang['send_file_message']        = 'Message';
 $lang['send_file']                = 'Send File';
-$lang['add_checklist_item']       = 'Checklist Item';
+$lang['add_checklist_item']       = 'Add Checklist Item';
 $lang['task_checklist_items']     = 'Checklist Items';
 
 # Import
@@ -1704,7 +1704,7 @@ $lang['email_template_proposals_fields_heading'] = 'Proposals';
 # Tasks
 $lang['add_task_attachments']  = 'Attachment';
 $lang['task_view_attachments'] = 'Attachments';
-$lang['task_view_description'] = 'Description';
+$lang['task_view_description'] = 'Task Description';
 
 # Customer Groups
 $lang['customer_group_add_heading']      = 'Add New Client Group';

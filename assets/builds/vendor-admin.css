@@ -3820,7 +3820,8 @@ textarea.input-lg {
     .form-inline .checkbox input[type=checkbox],
     .form-inline .radio input[type=radio] {
         position: relative;
-        margin-left: 0
+        margin-left: 0;
+        bottom: -3px;
     }
 
     .form-inline .has-feedback .form-control-feedback {

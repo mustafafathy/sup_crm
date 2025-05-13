@@ -65,7 +65,7 @@ $statuses = $CI->tasks_model->get_statuses();
                     </a>
                 <?php } ?>
                 <a href="<?php echo admin_url(!$this->input->get('project_id') ? ('tasks/switch_kanban/' . $switch_kanban) : ('projects/view/' . $this->input->get('project_id') . '?group=project_tasks')); ?>"
-                    class=" button-pr" data-toggle="tooltip" data-placement="top"
+                    class=" button-pr tw-hidden " data-toggle="tooltip" data-placement="top"
                     style="width: auto;height: inherit;margin-left:8px;"
                     data-title="<?php echo $switch_kanban == 1 ? _l('switch_to_list_view') : _l('leads_switch_to_kanban'); ?>">
                     <?php if ($switch_kanban == 1) { ?>
@@ -114,7 +114,7 @@ $statuses = $CI->tasks_model->get_statuses();
     <div class="content">
         <?php
         if ($this->session->has_userdata('tasks_kanban_view') && $this->session->userdata('tasks_kanban_view') == 'true') { ?>
-            <div class="kan-ban-tab" id="kan-ban-tab" style="/* overflow:auto; */">
+            <div class="kan-ban-tab" id="kan-ban-tab">
                 <div class="row">
                     <div id="kanban-params">
                         <?php echo form_hidden('project_id', $this->input->get('project_id')); ?>
@@ -163,12 +163,12 @@ $statuses = $CI->tasks_model->get_statuses();
         display: none;
     }
 
-    .modal-body .col-md-6 {
-        padding-left: 0px;
+    .modal-body #description {
+        resize: none;
     }
 
-    .card-element span {
-        color: #fff;
+    .modal-body label, .bold {
+        font-weight: bold;
     }
 
     .pagination>.active>a,
@@ -206,11 +206,11 @@ $statuses = $CI->tasks_model->get_statuses();
         padding-left: 25px;
     }
 
-    li.lead-kan-ban.current-user-lead .panel-body,
+    /* li.lead-kan-ban.current-user-lead .panel-body,
     li.task.current-user-task .panel-body {
-        /* background: #eff6ff !important;
-        border: 1px solid #dbeafe !important; */
-    }
+        background: #eff6ff !important;
+        border: 1px solid #dbeafe !important;
+    } */
 
     #kan-ban .panel-body {
         background-color: #FFFFFF !important;
@@ -285,7 +285,7 @@ $statuses = $CI->tasks_model->get_statuses();
         /* display: flex; */
         padding: 15px;
         text-align: right;
-        border-top: 1px solid #e5e5e5;
+        border-top: 0;
         flex-wrap: wrap;
         justify-content: space-evenly;
         align-content: center;
@@ -304,7 +304,6 @@ $statuses = $CI->tasks_model->get_statuses();
     /* .modal-footer .btn.btn-primary{
         background-color: #0B70A6;
     } */
-
 
     .card-element {
         border: none;
@@ -389,6 +388,14 @@ $statuses = $CI->tasks_model->get_statuses();
         border-radius: 8px;
     }
 
+    #tasks thead tr th:first-child {
+        border-radius: 8px 0 0 0;
+    }
+
+    #tasks thead tr th:last-child {
+        border-radius: 0 8px 0 0;
+    }
+
     #tasks>thead>tr>th.sorting_disabled {
         max-width: 10px;
         min-width: 10px;
@@ -459,6 +466,8 @@ $statuses = $CI->tasks_model->get_statuses();
     .form-inline .checkbox input[type=checkbox],
     .form-inline .radio input[type=radio] {
         cursor: pointer;
+        width: 20px;
+        height: 20px;
     }
 
     td .checkbox label:before {
@@ -594,10 +603,9 @@ $statuses = $CI->tasks_model->get_statuses();
         margin-top: 0px !important;
         margin-bottom: 6px !important;
         max-width: none !important;
-        border-collapse: separate !important box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.08);
-        border-radius: 6px;
+        border-collapse: separate !important;
+        box-shadow: 0px 1px 2px -1px #0000001A;
         overflow: visible;
-
     }
 
 
@@ -717,7 +725,7 @@ $statuses = $CI->tasks_model->get_statuses();
     }
 
     table.dataTable thead .sorting:after {
-        top: 20px;
+        top: 30px;
     }
 
     .page-section {}
@@ -747,10 +755,6 @@ $statuses = $CI->tasks_model->get_statuses();
         margin-right: 20px;
     }
 
-    #tasks>tbody>.has-row-options.even {
-        background-color: rgba(211, 211, 211, 0.2);
-    }
-
                             	.priority{
                                 max-width:140px;}
     .tasks-count {
@@ -778,27 +782,25 @@ $statuses = $CI->tasks_model->get_statuses();
         background: var(--background) !important;
     }
 
-    table.dataTable tbody td {
-        border-color: rgb(226 232 240 / 00%);
-    }
-
     /* Table Row Shadow Effect */
     .table-tasks tr {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
         /* Shadow effect */
         transition: box-shadow 0.2s ease-in-out;
         /* Smooth hover effect */
         height: 80px;
+        border-bottom: 1px solid #D4D4D4;
+        background: #ffffff;
     }
+
+    .table-tasks tr:nth-child(even){
+        background: #F9F9F9;
+    }
+
 
     /* Table Cell Styling */
     .table-tasks td {
-        border: 1px solid #dc2626;
-        /* Red border around cells */
         padding: 12px;
-        /* Inner padding for cells */
-        background-color: #fff;
-        /* Background color for cells */
     }
 
     /* Hover Effect (Optional) */
@@ -828,7 +830,6 @@ $statuses = $CI->tasks_model->get_statuses();
     /* Table Cell Styling */
     .table-tasks td {
         padding: 12px;
-        border: 1px solid #dc2626;
         position: relative;
         /* To allow relative positioning of child elements */
         overflow: hidden;

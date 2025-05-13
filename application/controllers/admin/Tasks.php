@@ -15,7 +15,7 @@ class Tasks extends AdminController
 
     }
 
-    /* Open also all taks if user access this /tasks url */
+    /* Open also all tasks if user access this /tasks url */
     public function index($id = '')
     {
         $this->list_tasks($id);

@@ -194,7 +194,7 @@ function render_custom_fields($belongs_to, $rel_id = false, $where = [], $items_
                 }
 
                 if ($field['required'] == 1) {
-                    $field_name = '<small class="req text-danger">* </small>' . $field_name;
+                    $field_name = $field_name . '<small class="req text-danger">*</small>';
                 }
 
                 $fields_html .= '<div class="form-group">';

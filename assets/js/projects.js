@@ -330,7 +330,7 @@ $(function () {
         }
         var label = $('label[for="timesheet_duration"]');
         if (label.length > 0 && label.find(".req").length == 0) {
-          label.prepend('<small class="req text-danger">* </small>');
+          label.append('<small class="req text-danger">* </small>');
         }
         return true;
       },

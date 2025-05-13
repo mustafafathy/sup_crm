@@ -1475,10 +1475,6 @@ fieldset[disabled] .form-control {
     border-left: 1px solid #cbd5e1
 }
 
-.checkbox {
-    padding-left: 20px
-}
-
 .checkbox label {
     display: inline-block;
     padding-left: 5px;
@@ -1491,9 +1487,9 @@ fieldset[disabled] .form-control {
     border: 1px solid #e2e8f0;
     border-radius: 3px;
     content: "";
-    height: 17px;
+    height: 18px;
     transition: border .15s ease-in-out, color .15s ease-in-out;
-    width: 17px
+    width: 18px
 }
 
 .checkbox label:after,
@@ -1508,7 +1504,6 @@ fieldset[disabled] .form-control {
     color: #334155;
     font-size: 11px;
     height: 16px;
-    padding-left: 3px;
     padding-top: 1px;
     top: 0;
     width: 16px
@@ -17546,8 +17541,6 @@ a.bg-danger:hover {
 .table>tbody>tr>td,
 .table>tfoot>tr>td {
     color: black;
-    background-color: white !important;
-    /* border-bottom: 1px solid #D4D4D4 !important; */
 }
 
 [dir=rtl] .table thead th {
@@ -17696,10 +17689,6 @@ div.dataTables_wrapper div.dataTables_paginate {
 [dir=rtl] .dataTables_paginate {
     margin-left: 15px !important;
     text-align: left !important
-}
-
-table.dataTable tbody td {
-    border-color: rgba(226, 232, 240, .7);
 }
 
 table.dataTable thead>tr>th {
@@ -17878,10 +17867,6 @@ ul.dt-button-collection.dropdown-menu {
 .dt-loader:not(:required):after {
     animation: loader 2s ease-out .45s infinite;
     right: -1.6em
-}
-
-.table .checkbox {
-    padding-left: 10px
 }
 
 body.gantt {

@@ -130,7 +130,7 @@ if (typeof $.validator == "undefined") {
                 )
                 .find('[for="' + $(this).attr("name") + '"]');
               if (label.length > 0 && label.find(".req").length === 0) {
-                label.prepend('<small class="req text-danger">* </small>');
+                label.append('<small class="req text-danger">* </small>');
               }
             }
           }
@@ -147,7 +147,7 @@ if (typeof $.validator == "undefined") {
           ) {
             var label = $form.find('[for="' + name + '"]');
             if (label.length > 0 && label.find(".req").length === 0) {
-              label.prepend(' <small class="req text-danger">* </small>');
+              label.append(' <small class="req text-danger">* </small>');
             }
           }
         });
