@@ -1388,8 +1388,8 @@ body #wrapper .btn.btn-default i::before {
 }
 
 .modal-header {
-  background: #4e68ec;
-  background: linear-gradient(to right, #4e68ec, #5068e0 37%, #6c81ea 100%);
+  background: #F9F9F9;
+  /* background: linear-gradient(to right, #4e68ec, #5068e0 37%, #6c81ea 100%); */
   color: #fff;
 }
 

@@ -10,8 +10,9 @@
             }
             ?>
             <div class="col-md-12">
+                
                 <h4
-                    class="tw-mt-0 tw-font-semibold tw-text-lg tw-text-neutral-700 tw-flex tw-items-center tw-space-x-2">
+                    class="tw-mt-0 t w-font-semibold tw-text-lg tw-text-neutral-700 tw-flex tw-items-center tw-space-x-2">
                     <span>
                         <?php echo e(isset($invoice) ? format_invoice_number($invoice) : _l('create_new_invoice')); ?>
                     </span>

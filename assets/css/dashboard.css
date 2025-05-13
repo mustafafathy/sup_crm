@@ -481,12 +481,12 @@ h3 {
 
 #grid_tasks_all {
     gap: 16px;
-
+    padding: 0 24px;
 }
 
 #grid_tasks_me {
     gap: 16px;
-
+    padding: 0 24px;
 }
 
 .view-details {
@@ -882,9 +882,8 @@ alert {
 }
 
 .tasks-section {
-    padding-bottom: 12px;
+    padding: 0 24px 12px;
     min-width: 100%;
-
 }
 
 .button-pr {
