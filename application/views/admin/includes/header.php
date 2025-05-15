@@ -1,10 +1,11 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <div id="header">
-    <div class="hide-menu tw-ml-1"><i class="fa fa-align-left"></i></div>
-
     <nav>
         <div class="tw-flex tw-justify-between">
             <div class="tw-flex tw-flex-1 sm:tw-flex-initial">
+                <div class="hide-menu">
+                    <i class="fa fa-align-left"></i>
+                </div>
                 <div id="top_search"
                     class="tw-inline-flex tw-relative dropdown sm:tw-ml-1.5 sm:tw-mr-3 tw-max-w-xl tw-flex-auto"
                     data-toggle="tooltip" data-placement="bottom" data-title="<?php echo _l('search_by_tags'); ?>">
@@ -27,54 +28,54 @@
                     $quickActions = collect($this->app->get_quick_actions_links())->reject(function ($action) {
                         return isset($action['permission']) && staff_cant('create', $action['permission']);
                     });
-                ?>
+                    ?>
                     <?php if ($quickActions->isNotEmpty()) { ?>
-                    <li class="icon tw-relative ltr:tw-mr-1.5 rtl:tw-ml-1.5" title="<?php echo _l('quick_create'); ?>"
-                        data-toggle="tooltip" data-placement="bottom">
-                        <a href="#" class="!tw-px-0 tw-group !tw-text-white" data-toggle="dropdown">
-                            <span
-                                class="tw-rounded-full tw-bg-primary-600 tw-text-white tw-inline-flex tw-items-center tw-justify-center tw-h-7 tw-w-7 -tw-mt-1 group-hover:!tw-bg-primary-700">
-                                <i class="fa-regular fa-plus fa-lg"></i>
-                            </span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-right animated fadeIn tw-text-base">
-                            <li class="dropdown-header tw-mb-1">
-                                <?php echo _l('quick_create'); ?>
-                            </li>
-                            <?php foreach ($quickActions as $key => $item) {
-                    $url = '';
-                    if (isset($item['permission'])) {
-                        if (staff_cant('create', $item['permission'])) {
-                            continue;
-                        }
-                    }
-                    if (isset($item['custom_url'])) {
-                        $url = $item['url'];
-                    } else {
-                        $url = admin_url('' . $item['url']);
-                    }
-                    $href_attributes = '';
-                    if (isset($item['href_attributes'])) {
-                        foreach ($item['href_attributes'] as $key => $val) {
-                            $href_attributes .= $key . '=' . '"' . $val . '"';
-                        }
-                    } ?>
-                            <li>
-                                <a href="<?php echo e($url); ?>" <?php echo $href_attributes; ?>
-                                    class="tw-group tw-inline-flex tw-space-x-0.5 tw-text-neutral-700">
-                                    <?php if (isset($item['icon'])) { ?>
-                                    <i
-                                        class="<?php echo e($item['icon']); ?> tw-text-neutral-400 group-hover:tw-text-neutral-600 tw-h-5 tw-w-5"></i>
-                                    <?php } ?>
-                                    <span>
-                                        <?php echo e($item['name']); ?>
-                                    </span>
-                                </a>
-                            </li>
-                            <?php
-                } ?>
-                        </ul>
-                    </li>
+                        <li class="icon tw-relative ltr:tw-mr-1.5 rtl:tw-ml-1.5" title="<?php echo _l('quick_create'); ?>"
+                            data-toggle="tooltip" data-placement="bottom">
+                            <a href="#" class="!tw-px-0 tw-group !tw-text-white" data-toggle="dropdown">
+                                <span
+                                    class="tw-rounded-full tw-bg-primary-600 tw-text-white tw-inline-flex tw-items-center tw-justify-center tw-h-7 tw-w-7 -tw-mt-1 group-hover:!tw-bg-primary-700">
+                                    <i class="fa-regular fa-plus fa-lg"></i>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right animated fadeIn tw-text-base">
+                                <li class="dropdown-header tw-mb-1">
+                                    <?php echo _l('quick_create'); ?>
+                                </li>
+                                <?php foreach ($quickActions as $key => $item) {
+                                    $url = '';
+                                    if (isset($item['permission'])) {
+                                        if (staff_cant('create', $item['permission'])) {
+                                            continue;
+                                        }
+                                    }
+                                    if (isset($item['custom_url'])) {
+                                        $url = $item['url'];
+                                    } else {
+                                        $url = admin_url('' . $item['url']);
+                                    }
+                                    $href_attributes = '';
+                                    if (isset($item['href_attributes'])) {
+                                        foreach ($item['href_attributes'] as $key => $val) {
+                                            $href_attributes .= $key . '=' . '"' . $val . '"';
+                                        }
+                                    } ?>
+                                    <li>
+                                        <a href="<?php echo e($url); ?>" <?php echo $href_attributes; ?>
+                                            class="tw-group tw-inline-flex tw-space-x-0.5 tw-text-neutral-700">
+                                            <?php if (isset($item['icon'])) { ?>
+                                                <i
+                                                    class="<?php echo e($item['icon']); ?> tw-text-neutral-400 group-hover:tw-text-neutral-600 tw-h-5 tw-w-5"></i>
+                                            <?php } ?>
+                                            <span>
+                                                <?php echo e($item['name']); ?>
+                                            </span>
+                                        </a>
+                                    </li>
+                                <?php
+                                } ?>
+                            </ul>
+                        </li>
                     <?php } ?>
                 </ul>
             </div>
@@ -87,27 +88,27 @@
                 </button>
                 <ul class="mobile-icon-menu tw-inline-flex tw-mt-5">
                     <?php
-               // To prevent not loading the timers twice
-            if (is_mobile()) { ?>
-                    <li
-                        class="dropdown notifications-wrapper header-notifications tw-block ltr:tw-mr-1.5 rtl:tw-ml-1.5">
-                        <?php $this->load->view('admin/includes/notifications'); ?>
-                    </li>
-                    <li class="header-timers ltr:tw-mr-1.5 rtl:tw-ml-1.5">
-                        <a href="#" id="top-timers" class="dropdown-toggle top-timers tw-block tw-h-5 tw-w-5"
-                            data-toggle="dropdown">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="tw-w-5 tw-h-5 tw-shrink-0">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span
-                                class="tw-leading-none tw-px-1 tw-py-0.5 tw-text-xs bg-success tw-z-10 tw-absolute tw-rounded-full -tw-right-3 -tw-top-2 tw-min-w-[18px] tw-min-h-[18px] tw-inline-flex tw-items-center tw-justify-center icon-started-timers<?php echo $totalTimers = count($startedTimers) == 0 ? ' hide' : ''; ?>"><?php echo count($startedTimers); ?></span>
-                        </a>
-                        <ul class="dropdown-menu animated fadeIn started-timers-top width300" id="started-timers-top">
-                            <?php $this->load->view('admin/tasks/started_timers', ['startedTimers' => $startedTimers]); ?>
-                        </ul>
-                    </li>
+                    // To prevent not loading the timers twice
+                    if (is_mobile()) { ?>
+                        <li
+                            class="dropdown notifications-wrapper header-notifications tw-block ltr:tw-mr-1.5 rtl:tw-ml-1.5">
+                            <?php $this->load->view('admin/includes/notifications'); ?>
+                        </li>
+                        <li class="header-timers ltr:tw-mr-1.5 rtl:tw-ml-1.5">
+                            <a href="#" id="top-timers" class="dropdown-toggle top-timers tw-block tw-h-5 tw-w-5"
+                                data-toggle="dropdown">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor" class="tw-w-5 tw-h-5 tw-shrink-0">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span
+                                    class="tw-leading-none tw-px-1 tw-py-0.5 tw-text-xs bg-success tw-z-10 tw-absolute tw-rounded-full -tw-right-3 -tw-top-2 tw-min-w-[18px] tw-min-h-[18px] tw-inline-flex tw-items-center tw-justify-center icon-started-timers<?php echo $totalTimers = count($startedTimers) == 0 ? ' hide' : ''; ?>"><?php echo count($startedTimers); ?></span>
+                            </a>
+                            <ul class="dropdown-menu animated fadeIn started-timers-top width300" id="started-timers-top">
+                                <?php $this->load->view('admin/tasks/started_timers', ['startedTimers' => $startedTimers]); ?>
+                            </ul>
+                        </li>
                     <?php } ?>
                 </ul>
                 <div class="mobile-navbar collapse" id="mobile-collapse" aria-expanded="false" style="height: 0px;"
@@ -126,11 +127,11 @@
                             </a>
                         </li>
                         <?php if (is_staff_member()) { ?>
-                        <li class="header-newsfeed">
-                            <a href="#" class="open_newsfeed mobile">
-                                <?php echo _l('whats_on_your_mind'); ?>
-                            </a>
-                        </li>
+                            <li class="header-newsfeed">
+                                <a href="#" class="open_newsfeed mobile">
+                                    <?php echo _l('whats_on_your_mind'); ?>
+                                </a>
+                            </li>
                         <?php } ?>
                         <li class="header-logout">
                             <a href="#" onclick="logout(); return false;">
@@ -145,16 +146,16 @@
                 <?php do_action_deprecated('after_render_top_search', [], '3.0.0', 'admin_navbar_start'); ?>
                 <?php hooks()->do_action('admin_navbar_start'); ?>
                 <?php if (is_staff_member()) { ?>
-                <li class="icon header-newsfeed">
-                    <a href="#" class="open_newsfeed desktop" data-toggle="tooltip"
-                        title="<?php echo _l('whats_on_your_mind'); ?>" data-placement="bottom">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="tw-w-5 tw-h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
-                        </svg>
-                    </a>
-                </li>
+                    <li class="icon header-newsfeed">
+                        <a href="#" class="open_newsfeed desktop" data-toggle="tooltip"
+                            title="<?php echo _l('whats_on_your_mind'); ?>" data-placement="bottom">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="tw-w-5 tw-h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
+                            </svg>
+                        </a>
+                    </li>
                 <?php } ?>
 
                 <li class="icon header-todo">
@@ -187,7 +188,7 @@
                         <li class="header-edit-profile"><a
                                 href="<?php echo admin_url('staff/edit_profile'); ?>"><?php echo _l('nav_edit_profile'); ?></a>
                         </li>
-                        
+
                         <li class="header-logout">
                             <a href="#" onclick="logout(); return false;"><?php echo _l('nav_logout'); ?></a>
                         </li>

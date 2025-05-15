@@ -1,11 +1,10 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-<!-- <link rel="stylesheet" href="<?php echo base_url('assets/tables.css'); ?>"> -->
 <script src="<?php echo site_url('resources/js/html2canvas.min.js'); ?>"></script>
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />t>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 <?php if ($_GET['account'] == 2) blank_page('SOLAR MISSING REPORT IS COMING SOON :)'); ?>
 <?php init_head(); ?>
@@ -186,14 +185,13 @@
 
         ?>
         <div class="content-wrapper">
-            <div class="grid grid-cols-5 gap-5">
-                <div class="reports-header col-span-3">
+            <div class="grid grid-cols-8" style="gap: 10px;">
+                <div class="reports-header col-span-5">
                     <h3>RE Summary</h3>
                 </div>
-                <div class="reports-header-actions col-span-2 grid grid-cols-3 tw-justify-between">
-                    <div class="form-group">
-                        <input class="form-control" type="text" id="date_range" name="date_range" />
-                    </div>
+                <div class="col-span-3 reports-header-actions col-span-2 grid grid-cols-3 tw-justify-between">
+                    <input class="form-control" type="text" id="date_range" name="date_range" style="height: 100%;" />
+
                     <button>
                         <i class="fa-solid fa-up-right-from-square"></i>
                         Export
@@ -279,7 +277,7 @@
                         </div>
                         <div class="ticket-status">
                             <h3 class="m-2">status</h3>
-                            <?php echo ($dtarget - $weight < 0 ? "<div style='background: transparent url(" . site_url('resources') . "/images/bg_menu.gif)'><span style='color:green'><i class='fa-solid fa-award'></i> Over Achieved</span></div>" : ($dtarget - $weight == 0 ? '<div style="background: transparent url(' . site_url("resources") . '/images/bg_menu.gif)"><span class="completed" style="color:#34A770;"> <i class="fa-solid fa-trophy"></i> Achieved</span></div>' : '<div>Not Achieved</div>')); ?>
+                            <?php echo ($dtarget - $weight < 0 ? "<div style='background: transparent url(" . site_url('resources') . "/images/bg_menu.gif)'><span style='color:green'><i class='fa-solid fa-award'></i><div>Over Achieved</div></span></div>" : ($dtarget - $weight == 0 ? '<div style="background: transparent url(' . site_url("resources") . '/images/bg_menu.gif)"><span class="completed" style="color:#34A770;"> <i class="fa-solid fa-trophy"></i><div>Achieved</div></span></div>' : '<div>Not Achieved</div>')); ?>
                         </div>
                         <div class="ticket-body">
                             <div class="main-states grid grid-cols-3 gap-3 justify-between">
@@ -407,7 +405,7 @@
 
     .reports-header-actions {
         margin-bottom: 12px;
-        gap: 20px;
+        gap: 10px;
     }
 
     .reports-header-actions button {
@@ -606,7 +604,9 @@
             const canvas = await html2canvas(document.getElementById('wrapper'));
             const dataUrl = canvas.toDataURL('image/png');
             const blob = await (await fetch(dataUrl)).blob();
-            const item = new ClipboardItem({ 'image/png': blob });
+            const item = new ClipboardItem({
+                'image/png': blob
+            });
             await navigator.clipboard.write([item]);
             alert('Snapshot copied to clipboard!');
         } catch (error) {
