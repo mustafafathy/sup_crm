@@ -899,6 +899,8 @@ alert {
     transition: 0.4s;
 }
 
+/* Gouda  */
+
 /* width */
 ::-webkit-scrollbar {
     width: 7px;
@@ -919,4 +921,8 @@ alert {
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: rgba(0, 0, 0, 0.4); 
+  }
+
+  textarea {
+    resize: none !important;
   }

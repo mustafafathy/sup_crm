@@ -148,11 +148,11 @@
 
         ?>
         <div class="content-wrapper">
-            <div class="grid grid-cols-4 gap-5">
-                <div class="reports-header col-span-3">
+            <div class="grid grid-cols-8" style="gap: 10px;">
+                <div class="reports-header col-span-6">
                     <h3>RE Summary</h3>
                 </div>
-                <div class="reports-header-actions grid grid-cols-2 tw-justify-between">
+                <div class="col-span-2 reports-header-actions grid grid-cols-2 tw-justify-between">
                     <button>
                         <i class="fa-solid fa-up-right-from-square"></i>
                         Export
@@ -240,7 +240,7 @@
                         </div>
                         <div class="ticket-status">
                             <h3 class="m-2">status</h3>
-                            <?php echo ($dtarget - $weight < 0 ? "<div style='background: transparent url(" . site_url('resources') . "/images/bg_menu.gif)'><span style='color:green'><i class='fa-solid fa-award'></i> Over Achieved</span></div>" : ($dtarget - $weight == 0 ? '<div style="background: transparent url(' . site_url("resources") . '/images/bg_menu.gif)"><span class="completed" style="color:#34A770;"> <i class="fa-solid fa-trophy"></i> Achieved</span></div>' : '<div>Not Achieved</div>')); ?>
+                            <?php echo ($dtarget - $weight < 0 ? "<div style='background: transparent url(" . site_url('resources') . "/images/bg_menu.gif)'><span style='color:green'><i class='fa-solid fa-award'></i><div>Over Achieved</div></span></div>" : ($dtarget - $weight == 0 ? '<div style="background: transparent url(' . site_url("resources") . '/images/bg_menu.gif)"><span class="completed" style="color:#34A770;"> <i class="fa-solid fa-trophy"></i><div>Achieved</div></span></div>' : '<div>Not Achieved</div>')); ?>
                         </div>
                         <div class="ticket-body">
                             <div class="main-states grid grid-cols-3 gap-3 justify-between">
@@ -422,7 +422,7 @@
 
     .reports-header-actions {
         margin-bottom: 12px;
-        gap: 20px;
+        gap: 10px;
     }
 
     .reports-header-actions button {

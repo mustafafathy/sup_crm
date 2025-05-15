@@ -1200,12 +1200,10 @@ label:not(.control-label) {
 }
 
 .hide-menu {
-    padding: 18px 14px 18px 14px;
-    font-size: 14px;
-    float: left;
     color: #475569;
+    font-size: 19px;
+    padding: 20px;
     cursor: pointer;
-    line-height: 27px
 }
 
 .hide-menu:hover {
