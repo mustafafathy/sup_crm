@@ -1017,7 +1017,81 @@ updateDisplay(true);
         const selectElement = document.getElementById(selectId);
         selectElement.value = value;
     }
+    function reload_or_filter_tasks_tables(filters = {}, resetPagination = false) {
+  const av_tasks_tables = [
+    ".table-tasks",
+    ".table-rel-tasks",
+    ".table-rel-tasks-leads",
+    ".table-timesheets",
+    ".table-timesheets-report",
+  ];
+  // Build search function based on filters
+  // const searchFn = buildSearchFunction(filters);
 
+  // Iterate through the table selectors
+  $.each(av_tasks_tables, function (i, selector) {
+    if ($.fn.DataTable.isDataTable(selector)) {
+      const tableInstance = $(selector).DataTable();
+      const selectedRows = [];
+
+      // // Extend current AJAX parameters with new filters
+      // tableInstance.settings()[0].ajax.data = function (d) {
+      //   // $.extend(d, buildSearchFunction(filters));
+      //   $.extend(d, filters['search']);
+
+      // };
+      tableInstance.rows().every(function (rowIdx) {
+        const row = tableInstance.row(rowIdx);
+        const rowElement = $(row.node());
+
+        // Get the status cell and extract the `task-status-table` attribute
+        const statusCell = rowElement.find(filters['selector']);
+        const taskStatus = statusCell.attr('task-status-table');
+
+        // Find all image tags in the specified cell using `filter_selector`
+        const imageCells = rowElement.find(filters['filter_selector']);
+
+        // Check if there's at least one image with matching `data-id`
+        const hasMatchingImage = imageCells.filter(function () {
+          const taskUser = $(this).attr('data-id');
+          return taskUser === filters['data_filter'];
+        }).length > 0;
+
+        // Determine if the current row matches the status filter
+        const statusMatches = (taskStatus === filters['search'] || filters['search'] === '');
+
+        // Determine if the current row matches the image filter
+        const imageMatches = (hasMatchingImage || filters['data_filter'] === '');
+
+        // Show the row if both conditions are satisfied
+        if (statusMatches && imageMatches) {
+          selectedRows.push(rowIdx);
+          rowElement.show();
+        } else {
+          rowElement.hide();
+        }
+      });
+      // // Build search function based on filters
+      // const searchFn = buildSearchFunction(filters);
+
+      // console.log(`Applying filters:`);
+      // for (const key in filters) {
+      //   console.log(`  - ${key}: ${filters[key]}`);
+      // }
+
+      // // Apply filters directly
+      // tableInstance
+      // console.log(filters['search']);
+      // console.log(filters);
+      // tableInstance.column(filters['index'])
+      // .search(searchFn)
+      // .draw();
+
+      // Reload the DataTable with new filters
+      // reload_tasks_tables();
+    }
+  });
+}
 </script>
 
 
