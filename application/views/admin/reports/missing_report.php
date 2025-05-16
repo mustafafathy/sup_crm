@@ -271,7 +271,7 @@
                             </div>
                         </div>
                         <div class="ticket-footer flex items-center py-3 w-full mt-8">
-                            <button type="button" class="text-white bg-sky-700 font-medium rounded-lg text-sm px-9 py-2 mx-auto">view more</button>
+                            <button type="button" class="text-white bg-sky-700 font-medium rounded-lg text-sm px-9 py-2 mx-auto" disabled>view more</button>
                         </div>
                     </div>
                     <!-- <tr>
