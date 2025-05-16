@@ -528,7 +528,7 @@
                     <div class="checklist-assign col-md-6">
                         <?php
                         $follower = (get_option('new_task_auto_follower_current_member') == '1') ? [get_staff_user_id()] : '';
-                        echo render_select('assignTo[]', $members, ['staffid', ['firstname', 'lastname']], 'Assign to', $follower, ['multiple' => true], [], '', '', false);
+                        echo render_select('assignTo[]', $staff, ['staffid', ['firstname', 'lastname']], 'Assign to', $follower, ['multiple' => true], [], '', '', false);
                         ?>
                     </div>
                     <div class="checklist-priority col-md-6">
