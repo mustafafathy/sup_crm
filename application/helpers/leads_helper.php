@@ -349,6 +349,7 @@ function total_leads_eval($date_from = null, $date_to = null)
         tblleads_status ts ON tl.status = ts.id
     LEFT JOIN
         tblcustomfieldsvalues cf ON tl.id = cf.relid AND cf.fieldid = 4
+    WHERE ls.account = 1
     GROUP BY 
         ls.name";
 
