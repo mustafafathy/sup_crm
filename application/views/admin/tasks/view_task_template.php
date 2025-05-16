@@ -723,9 +723,7 @@
     </div>
     <div class="col-md-4 task-single-col-right">
         <div class="comments-header">
-            <a href="#" id="taskCommentSlide" onclick="slideToggle('.tasks-comments'); return false;">
-                <h4 class="mbot20 font-medium"><?php echo _l('task_comments'); ?></h4>
-            </a>
+            <h4 class="mbot20 font-medium"><?php echo _l('task_comments'); ?></h4>
             <button class="sort-button">
                 <i class="fas fa-sort"></i> Newest
             </button>
