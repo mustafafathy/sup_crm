@@ -929,5 +929,5 @@ alert {
 
   button:disabled {
     background-color: #f4f4f4 !important;
-    color: #475569 !important;
+    color: rgba(0, 0, 0, 0.4) !important;
 }

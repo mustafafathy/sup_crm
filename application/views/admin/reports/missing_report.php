@@ -154,7 +154,7 @@
                     <h3>RE Summary</h3>
                 </div>
                 <div class="col-span-2 reports-header-actions grid grid-cols-2 tw-justify-between">
-                    <button>
+                    <button id="exportBtn">
                         <i class="fa-solid fa-up-right-from-square"></i>
                         Export
                     </button>
@@ -162,6 +162,31 @@
                         <i class="fa-solid fa-camera"></i>
                         Screenshoot
                     </button>
+                </div>
+            </div>
+
+            <div id="exportModal" class="modal">
+                <div class="modal-content text-center">
+                    <span class="close" id="closeModal">&times;</span>
+                    <?php echo form_open('/admin/reports/missing_report/export', ['method' => 'post', 'id' => 'exportForm']); ?>
+                    <label for="start_date" class="block text-sm font-medium text-gray-700">Start
+                        Date:</label>
+                    <input type="date" id="start_date" name="startDate" value="<?php echo $today; ?>"
+                        class="tw-form-input tw-w-64 tw-px-2 tw-py-1 tw-text-sm">
+                    <label for="end_date" class="block text-sm font-medium text-gray-700">End Date:</label>
+                    <input type="date" id="end_date" name="endDate" value="<?php echo $today; ?>"
+                        class="tw-form-input tw-w-64 tw-px-2 tw-py-1 tw-text-sm">
+                    <label for="export_format" class="block text-sm font-medium text-gray-700">Export
+                        Format:</label>
+                    <select id="export_format" name="exportType"
+                        class="tw-form-input tw-w-64 tw-px-2 tw-py-1 tw-text-sm">
+                        <option value="csv">CSV</option>
+                        <!--<option value="excel">Excel</option>
+                                        <option value="pdf">PDF</option>-->
+                    </select>
+                    <button type="button" class="btn btn-primary tw-w-64 tw-px-2 tw-py-1"
+                        onclick="submitExportForm()"><i class="fa fa-download"></i> Generate Export</button>
+                    <?php echo form_close(); ?>
                 </div>
             </div>
 
@@ -584,9 +609,86 @@
         /* transform: translateY(-1px); */
         cursor: not-allowed;
     }
+
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 1000;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 60%;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<script>
+    const modal = document.getElementById('exportModal');
+    const exportBtn = document.getElementById('exportBtn');
+    const closeModal = document.getElementById('closeModal');
+    const exportForm = document.getElementById('exportForm');
+
+    exportBtn.onclick = function() {
+        modal.style.display = 'block';
+    }
+
+    closeModal.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+    function submitExportForm() {
+        const startDate = document.getElementById('start_date').value;
+        const endDate = document.getElementById('end_date').value;
+        const exportFormat = document.getElementById('export_format').value;
+
+        if (!startDate || !endDate) {
+            alert('Please select both start and end dates.');
+            return;
+        }
+
+        if (new Date(startDate) > new Date(endDate)) {
+            alert('Start date must be before or equal to end date.');
+            return;
+        }
+
+        if (!exportFormat) {
+            alert('Please select an export format.');
+            return;
+        }
+
+        exportForm.submit();
+    }
+</script>
 <script>
     function ticketToggler(ticketId) {
         const targetedTicket = document.getElementById(ticketId);
