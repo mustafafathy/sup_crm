@@ -8,7 +8,7 @@
 
 <?php if ($_GET['account'] == 2) blank_page('SOLAR MISSING REPORT IS COMING SOON :)'); ?>
 <?php init_head(); ?>
-<?php $today = date('Y-m-d'); ?>
+<?php $today = date('m-d-Y'); ?>
 
 <body>
     <div id="wrapper">
@@ -190,9 +190,18 @@
                     <h3>RE Summary</h3>
                 </div>
                 <div class="col-span-3 reports-header-actions col-span-2 grid grid-cols-3 tw-justify-between">
-                    <input class="form-control" type="text" id="date_range" name="date_range" style="height: 100%;" />
-
-                    <button>
+                    <input class="form-control" type="text" id="date_range" name="date_range" style="height: 100%;"
+                        value="<?php echo isset($_POST['date_from']) ? (new DateTime(htmlspecialchars($_POST['date_from'])))->format('m-d-Y') : $today; ?> - <?php echo isset($_POST['date_to']) ? (new DateTime(htmlspecialchars($_POST['date_to'])))->format('m-d-Y') : $today; ?>">
+                    <div id="date_filter_form" class="hidden">
+                        <?php echo form_open('/admin/reports/campaign_report', ['method' => 'post', 'id' => 'dateFilterForm']); ?>
+                        <label for="date_from"></label>
+                        <input type="text" id="date_from" name="date_from" class="hidden" placeholder="Start Date" value="<?php echo isset($_POST['date_from']) ? htmlspecialchars($_POST['date_from']) : $today; ?>">
+                        <label for="date_to"></label>
+                        <input type="text" id="date_to" name="date_to" class="hidden" placeholder="End Date" value="<?php echo isset($_POST['date_to']) ? htmlspecialchars($_POST['date_to']) : $today; ?>">
+                        <input type="submit">
+                        <?php echo form_close(); ?>
+                    </div>
+                    <button id="exportBtn">
                         <i class="fa-solid fa-up-right-from-square"></i>
                         Export
                     </button>
@@ -200,6 +209,25 @@
                         <i class="fa-solid fa-camera"></i>
                         Screenshoot
                     </button>
+                </div>
+            </div>
+
+            <div id="exportModal" class="modal">
+                <div class="modal-content text-center">
+                    <span class="close" id="closeModal">&times;</span>
+                    <?php echo form_open('/admin/reports/campaign_report/export', ['method' => 'post', 'id' => 'exportForm']); ?>
+                    <label for="start_date" class="block text-sm font-medium text-gray-700">Start Date:</label>
+                    <input type="date" id="start_date" name="startDate" value="<?php echo $today; ?>" class="tw-form-input tw-w-64 tw-px-2 tw-py-1 tw-text-sm">
+                    <label for="end_date" class="block text-sm font-medium text-gray-700">End Date:</label>
+                    <input type="date" id="end_date" name="endDate" value="<?php echo $today; ?>" class="tw-form-input tw-w-64 tw-px-2 tw-py-1 tw-text-sm">
+                    <label for="export_format" class="block text-sm font-medium text-gray-700">Export Format:</label>
+                    <select id="export_format" name="exportType" class="tw-form-input tw-w-64 tw-px-2 tw-py-1 tw-text-sm">
+                        <option value="csv">CSV</option>
+                        <!--<option value="excel">Excel</option>
+										<option value="pdf">PDF</option>-->
+                    </select>
+                    <button type="button" class="btn btn-primary tw-w-64 tw-px-2 tw-py-1" onclick="submitExportForm()"><i class="fa fa-download"></i> Generate Export</button>
+                    <?php echo form_close(); ?>
                 </div>
             </div>
 
@@ -285,8 +313,18 @@
                                     <div class="title">
                                         target
                                     </div>
-                                    <div class="value">
-                                        <?php echo $dtarget; ?>
+                                    <div class="value target-value">
+                                        <!-- <span id="target_value_<?php echo $index; ?>" contenteditable="true" style="display:inline-block; min-width: 30px;"><?php echo $dtarget; ?></span> -->
+                                        <div>
+                                            <?php echo form_open('', ['method' => 'post', 'class' => 'tw-inline-flex tw-gap-2', 'autocomplete' => 'off']); ?>
+                                            <input type="hidden" name="id" value="<?php echo $row['lead_source_id']; ?>" />
+                                            <input type="hidden" name="name" value="<?php echo $row['lead_source_name']; ?>" />
+                                            <label for="editable_label_<?php echo $index; ?>" id="editable_label_<?php echo $index; ?>" data-id="<?php echo $index; ?>" contenteditable="true" type="number" min="1" max="1000" name="target" /><?php echo $dtarget; ?></label>
+                                            <input id="temp_input_<?php echo $index; ?>" style="display: none;" contenteditable="true" type="number" min="1" max="5000" value="<?php echo $dtarget; ?>" name="target" />
+
+                                            <button type="submit" style="display: none; border-radius: 45px; color: #000; background-color: #fff;" id="edit_button_<?php echo $index; ?>" class="btn btn-primary tw-w-10 tw-px-2 tw-py-1"><i class="fas fa-edit"></i></button>
+                                            <?php echo form_close(); ?>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="text-center">
@@ -365,14 +403,15 @@
                             <button type="button" class="text-white bg-sky-700 font-medium rounded-lg text-sm px-9 py-2 mx-auto" onclick="ticketToggler('ticket_<?php echo $row['lead_source_id']; ?>')">view more</button>
                         </div>
                     </div>
-                    <!-- <td style="padding: 1em; border: 1px solid black;"><?php echo form_open('', ['method' => 'post', 'class' => 'tw-inline-flex tw-gap-2', 'autocomplete' => 'off']); ?>
-                            <input type="hidden" name="id" value="<?php echo $row['lead_source_id']; ?>" />
-                            <input type="hidden" name="name" value="<?php echo $row['lead_source_name']; ?>" />
-                            <label for="editable_label_<?php echo $index; ?>" id="editable_label_<?php echo $index; ?>" data-id="<?php echo $index; ?>" contenteditable="true" type="number" min="1" max="1000" name="target" /><?php echo $dtarget; ?></label>
-                            <input id="temp_input_<?php echo $index; ?>" style="display: none;" contenteditable="true" type="number" min="1" max="5000" value="<?php echo $dtarget; ?>" name="target" />
+                    <!-- <td style="padding: 1em; border: 1px solid black;">
+                        <?php echo form_open('', ['method' => 'post', 'class' => 'tw-inline-flex tw-gap-2', 'autocomplete' => 'off']); ?>
+                        <input type="hidden" name="id" value="<?php echo $row['lead_source_id']; ?>" />
+                        <input type="hidden" name="name" value="<?php echo $row['lead_source_name']; ?>" />
+                        <label for="editable_label_<?php echo $index; ?>" id="editable_label_<?php echo $index; ?>" data-id="<?php echo $index; ?>" contenteditable="true" type="number" min="1" max="1000" name="target" /><?php echo $dtarget; ?></label>
+                        <input id="temp_input_<?php echo $index; ?>" style="display: none;" contenteditable="true" type="number" min="1" max="5000" value="<?php echo $dtarget; ?>" name="target" />
 
-                            <button type="submit" style="display: none; border-radius: 45px; color: #000; background-color: #fff;" id="edit_button_<?php echo $index; ?>" class="btn btn-primary tw-w-10 tw-px-2 tw-py-1"><i class="fas fa-edit"></i></button>
-                            <?php echo form_close(); ?>
+                        <button type="submit" style="display: none; border-radius: 45px; color: #000; background-color: #fff;" id="edit_button_<?php echo $index; ?>" class="btn btn-primary tw-w-10 tw-px-2 tw-py-1"><i class="fas fa-edit"></i></button>
+                        <?php echo form_close(); ?>
                         </td> -->
                 <?php } ?>
 
@@ -515,9 +554,10 @@
         margin: 2px;
     }
 
-    .ticket-body .value {
+    .ticket-body .value, .ticket-body .value label {
         font-weight: 600;
-        font-size: 16px;
+        font-size: 16px !important;
+        min-width: 37px;
     }
 
     .more-states {
@@ -569,22 +609,130 @@
     .ticket-footer button:hover {
         transform: translateY(-1px);
     }
+
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 1000;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 60%;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <script>
+    const dateFilterForm = document.getElementById('dateFilterForm')
+    const dateFromInput = document.getElementById('date_from');
+    const dateToInput = document.getElementById('date_to');
+
+    const modal = document.getElementById('exportModal');
+    const exportBtn = document.getElementById('exportBtn');
+    const closeModal = document.getElementById('closeModal');
+    const exportForm = document.getElementById('exportForm');
+
     $(function() {
         $('input[name="date_range"]').daterangepicker({
             opens: 'left'
         }, function(start, end, label) {
-            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            dateFilterFormSubmit(start, end)
+
+            console.log("A new date selection was made: " + label + " " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
         });
     });
+
+    function dateFilterFormSubmit(dateFrom, dateTo) {
+        dateFromInput.value = dateFrom;
+        dateToInput.value = dateTo;
+
+        dateFilterForm.submit();
+    }
+
+    exportBtn.onclick = function() {
+        modal.style.display = 'block';
+    }
+
+    closeModal.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+    function submitExportForm() {
+        const startDate = document.getElementById('start_date');
+        const endDate = document.getElementById('end_date');
+        const exportFormat = document.getElementById('export_format');
+
+        if (!startDate.value || !endDate.value) {
+            alert('Please select both start and end dates.');
+            return;
+        }
+
+        if (new Date(startDate.value) > new Date(endDate.value)) {
+            alert('Start date must be before or equal to end date.');
+            return;
+        }
+
+        if (!exportFormat.value) {
+            alert('Please select an export format.');
+            return;
+        }
+
+        exportForm.submit();
+    }
 </script>
 <script>
+    function showButton(id) {
+        const editButton = document.getElementById(`edit_button_${id}`);
+        if (editButton) {
+            editButton.style.display = 'inline-block';
+        } else {
+            console.warn(`Edit button with ID ${id} not found.`);
+        }
+    }
+    const labels = document.querySelectorAll('label[data-id]');
+    labels.forEach(label => {
+        label.addEventListener('blur', function() {
+            const id = this.dataset.id;
+            const ele = document.getElementById(`temp_input_${id}`);
+            ele.value = label.textContent
+            console.log('debug:label#temp_input_${id}', label.textContent);
+            showButton(id);
+        });
+    });
+
     function ticketToggler(ticketId) {
         const targetedTicket = document.getElementById(ticketId);
-        const toggleButton = document.getElementById(ticketId).getElementsByTagName("button")[0];
+        const toggleButton = document.getElementById(ticketId).getElementsByTagName("button")[1];
         const ticketTable = document.getElementById(ticketId).getElementsByClassName("more-states")[0];
 
         if (ticketTable) {
