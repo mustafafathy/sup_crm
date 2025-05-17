@@ -313,12 +313,13 @@
                                     <div class="title">
                                         target
                                     </div>
-                                    <div class="value" contenteditable="true">
-                                        <?php echo $dtarget; ?>
-                                        <div class="hidden">
-                                            <?php echo form_open('', ['method' => 'post', 'autocomplete' => 'off']); ?>
+                                    <div class="value target-value">
+                                        <!-- <span id="target_value_<?php echo $index; ?>" contenteditable="true" style="display:inline-block; min-width: 30px;"><?php echo $dtarget; ?></span> -->
+                                        <div>
+                                            <?php echo form_open('', ['method' => 'post', 'class' => 'tw-inline-flex tw-gap-2', 'autocomplete' => 'off']); ?>
                                             <input type="hidden" name="id" value="<?php echo $row['lead_source_id']; ?>" />
                                             <input type="hidden" name="name" value="<?php echo $row['lead_source_name']; ?>" />
+                                            <label for="editable_label_<?php echo $index; ?>" id="editable_label_<?php echo $index; ?>" data-id="<?php echo $index; ?>" contenteditable="true" type="number" min="1" max="1000" name="target" /><?php echo $dtarget; ?></label>
                                             <input id="temp_input_<?php echo $index; ?>" style="display: none;" contenteditable="true" type="number" min="1" max="5000" value="<?php echo $dtarget; ?>" name="target" />
 
                                             <button type="submit" style="display: none; border-radius: 45px; color: #000; background-color: #fff;" id="edit_button_<?php echo $index; ?>" class="btn btn-primary tw-w-10 tw-px-2 tw-py-1"><i class="fas fa-edit"></i></button>
@@ -553,9 +554,10 @@
         margin: 2px;
     }
 
-    .ticket-body .value {
+    .ticket-body .value, .ticket-body .value label {
         font-weight: 600;
-        font-size: 16px;
+        font-size: 16px !important;
+        min-width: 37px;
     }
 
     .more-states {
@@ -709,9 +711,28 @@
     }
 </script>
 <script>
+    function showButton(id) {
+        const editButton = document.getElementById(`edit_button_${id}`);
+        if (editButton) {
+            editButton.style.display = 'inline-block';
+        } else {
+            console.warn(`Edit button with ID ${id} not found.`);
+        }
+    }
+    const labels = document.querySelectorAll('label[data-id]');
+    labels.forEach(label => {
+        label.addEventListener('blur', function() {
+            const id = this.dataset.id;
+            const ele = document.getElementById(`temp_input_${id}`);
+            ele.value = label.textContent
+            console.log('debug:label#temp_input_${id}', label.textContent);
+            showButton(id);
+        });
+    });
+
     function ticketToggler(ticketId) {
         const targetedTicket = document.getElementById(ticketId);
-        const toggleButton = document.getElementById(ticketId).getElementsByTagName("button")[0];
+        const toggleButton = document.getElementById(ticketId).getElementsByTagName("button")[1];
         const ticketTable = document.getElementById(ticketId).getElementsByClassName("more-states")[0];
 
         if (ticketTable) {

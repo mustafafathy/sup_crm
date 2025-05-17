@@ -259,7 +259,8 @@ $totalTarget = 0;
                   
                 <td style="padding: 1em; border: 1px solid black;"><?php echo ($activity ? $campName : "<span title='".$campName."'><del>".$campName."</del></span>").' '.($activity  ? "<span style='color:#009933'>A</span><span style='color:#0BA036'>c</span><span style='color:#17A83A'>t</span><span style='color:#23B03E'>i</span><span style='color:#2FB842'>v</span><span style='color:#3AC046'>e</span></span>" : '<p style="color:red">Inactive</p>'); ?></td>
         	    <td style="padding: 1em; border: 1px solid black;"><?php echo ($dtarget-$weight < 0 ? "<span style='background: transparent url(".site_url('resources')."/images/bg_menu.gif)'><span style='color:green'><i class='fa-solid fa-award'></i> Over Achieved</span></span>" : ($dtarget-$weight == 0 ? '<span style="background: transparent url('.site_url("resources").'/images/bg_menu.gif)"><font color="green"><span class="completed"> <i class="fa-solid fa-trophy"></i> Achieved</span></font>' : '<font color="red">Not Achieved</font>')); ?></td>
-                <td style="padding: 1em; border: 1px solid black;"><?php echo form_open('', ['method' => 'post', 'class' => 'tw-inline-flex tw-gap-2', 'autocomplete' => 'off']); ?>
+                <td style="padding: 1em; border: 1px solid black;">
+                    <?php echo form_open('', ['method' => 'post', 'class' => 'tw-inline-flex tw-gap-2', 'autocomplete' => 'off']); ?>
                         <input type="hidden" name="id" value="<?php echo $row['lead_source_id']; ?>" />
                         <input type="hidden" name="name" value="<?php echo $row['lead_source_name']; ?>" />
                         <label for="editable_label_<?php echo $index; ?>" id="editable_label_<?php echo $index; ?>" data-id="<?php echo $index; ?>" contenteditable="true" type="number" min="1" max="1000" name="target" /><?php echo $dtarget; ?></label>
